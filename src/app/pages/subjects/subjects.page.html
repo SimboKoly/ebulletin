@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion des matières</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="stacked">Code</ion-label>
+      <ion-input formControlName="code"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Libellé</ion-label>
+      <ion-input formControlName="libelle"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Coefficient</ion-label>
+      <ion-input type="number" formControlName="coefficient"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="subjectForm.invalid">
+      Enregistrer
+    </ion-button>
+
+  </form>
+
+</ion-content>

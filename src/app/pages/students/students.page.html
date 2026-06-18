@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion des élèves</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="stacked">Matricule</ion-label>
+      <ion-input formControlName="matricule"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nom</ion-label>
+      <ion-input formControlName="nom"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Prénom</ion-label>
+      <ion-input formControlName="prenom"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Classe</ion-label>
+      <ion-input formControlName="classe"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Date de naissance</ion-label>
+      <ion-datetime
+        presentation="date"
+        formControlName="dateNaissance">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="studentForm.invalid">
+      Enregistrer
+    </ion-button>
+
+  </form>
+
+</ion-content>

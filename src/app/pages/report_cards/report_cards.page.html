@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion des bulletins</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="reportCardForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="stacked">ID Élève</ion-label>
+      <ion-input
+        type="number"
+        formControlName="studentId">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Moyenne</ion-label>
+      <ion-input
+        type="number"
+        formControlName="moyenne">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Rang</ion-label>
+      <ion-input
+        type="number"
+        formControlName="rang">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Appréciation</ion-label>
+      <ion-textarea
+        formControlName="appreciation">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="reportCardForm.invalid">
+      Enregistrer
+    </ion-button>
+
+  </form>
+
+</ion-content>
