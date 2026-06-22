@@ -1,31 +1,39 @@
-
 import { Component } from '@angular/core';
+import { IonApp, IonSplitPane, IonMenu, IonContent,
+IonList, IonListHeader, IonNote, IonMenuToggle,
+IonItem, IonIcon, IonLabel, IonRouterLink,
+IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, documentOutline, personOutline, bookOutline, listOutline } from 'ionicons/icons';
-
+import {
+homeOutline, peopleOutline, bookOutline,
+documentTextOutline, statsChartOutline, schoolOutline
+} from 'ionicons/icons';
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-  imports: [RouterLink, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterLink, IonRouterOutlet],
+selector: 'app-root',
+templateUrl: 'app.component.html',
+// Standalone : on importe directement les composants Ionic nécessaires
+imports: [
+IonApp, IonSplitPane, IonMenu, IonContent, IonList,
+IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon,
+IonLabel, IonRouterLink, RouterLink, RouterLinkActive, IonRouterOutlet
+],
+standalone: true,
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-    { title: 'Report Cards', url: '/report-cards', icon: 'document' },
-    { title: 'Students', url: '/students', icon: 'person' },
-    { title: 'Subjects', url: '/subjects', icon: 'book' },
-    { title: 'Grades', url: '/grades', icon: 'list' },
-  ];
-  public labels = [ ];
-  constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, documentOutline, personOutline, bookOutline, listOutline });
-  }
+// Définition des pages du menu latéral
+appPages = [
+{ title: 'Tableau de bord', url: '/dashboard', icon: 'home-outline' },
+{ title: 'Élèves', url: '/students', icon: 'people-outline' },
+{ title: 'Matières', url: '/subjects', icon: 'book-outline' },
+{ title: 'Notes', url: '/grades', icon: 'document-text-outline' },
+{ title: 'Bulletins', url: '/report-cards', icon: 'stats-chart-outline' },
+];
+constructor() {
+// Enregistrer les icônes utilisées dans le menu
+addIcons({
+homeOutline, peopleOutline, bookOutline,
+documentTextOutline, statsChartOutline, schoolOutline
+});
+}
 }
