@@ -48,7 +48,8 @@ export class GradesPage implements OnInit {
     this.gradeForm = this.fb.group({
       studentId: ['', Validators.required],
       subjectId: ['', Validators.required],
-      note: ['', Validators.required]
+      note: ['', Validators.required],
+      periode: ['', Validators.required]
     });
   }
 
@@ -59,7 +60,8 @@ export class GradesPage implements OnInit {
         id: Date.now(),
         studentId: Number(this.gradeForm.value.studentId),
         subjectId: Number(this.gradeForm.value.subjectId),
-        note: Number(this.gradeForm.value.note)
+        note: Number(this.gradeForm.value.note),
+        periode: this.gradeForm.value.periode
       };
 
       console.log('Note ajoutée :', grade);

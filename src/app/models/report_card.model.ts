@@ -10,6 +10,7 @@ export interface ReportCardLine {
 
   // Interface pour le bulletin complet
   export interface ReportCard {
+    id: number;
     student: string; // Nom complet de l'élève
     matricule: string; // Matricule de l'élève
     classe: string; // Classe de l'élève

@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+  <ion-buttons slot="start">
+  <!-- Bouton qui ouvre/ferme le menu latéral -->
+  <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Tableau de bord</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
-    </ion-toolbar>
   </ion-header>
+  <ion-content class="ion-padding">
+    <!-- ─── Cartes de statistiques ─── -->
+    <ion-grid>
+    <ion-row>
+    <!-- Carte : Nombre d'élèves -->
+    <ion-col size="6" size-md="3">
+    <!-- size="6" : 6/12 colonnes sur mobile (2 par ligne) -->
+    <!-- size-md="3" : 3/12 colonnes sur tablette (4 par ligne) -->
+    <ion-card>
+    <ion-card-content class="stat-card">
+    <ion-icon name="people-outline" color="primary"></ion-icon>
+    <!-- {{ expression }} = interpolation Angular -->
+    <h2>{{ totalStudents }}</h2>
+    <p>Élèves</p>
+    </ion-card-content>
+    </ion-card>
+    </ion-col>
+    <!-- Carte : Nombre de matières -->
+    <ion-col size="6" size-md="3">
+    <ion-card>
+    <ion-card-content class="stat-card">
+    <ion-icon name="book-outline" color="secondary"></ion-icon>
+    <h2>{{ totalSubjects }}</h2>
+    <p>Matières</p>
+    </ion-card-content>
+    </ion-card>
+    </ion-col>
+    <!-- Carte : Nombre de notes -->
+    <ion-col size="6" size-md="3">
+    <ion-card>
+    <ion-card-content class="stat-card">
+    <ion-icon name="document-text-outline" color="tertiary"></ion-icon>
+    <h2>{{ totalGrades }}</h2>
+    <p>Notes</p>
+    </ion-card-content>
+    </ion-card>
+    </ion-col>
+    <ion-col size="6" size-md="3">
+    <ion-card>
+    <ion-card-content class="stat-card">
+    <ion-icon name="trophy-outline" color="warning"></ion-icon>
+    <h2>{{ totalStudents > 0 ? 'OK' : '--' }}</h2>
+    <p>Bulletins</p>
+    </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+</ion-grid>
+<!-- ─── Derniers élèves ─── -->
+<ion-card>
+<ion-card-header>
+<ion-card-title>Derniers élèves ajoutés</ion-card-title>
+</ion-card-header>
+<ion-card-content>
+<!-- @if = nouvelle syntaxe Angular 17+ (remplace *ngIf) -->
+@if (recentStudents.length === 0) {
+<p class="ion-text-center ion-padding">Aucun élève enregistré.</p>
+} @else {
+<ion-list>
+<!-- @for = nouvelle syntaxe Angular 17+ (remplace *ngFor) -->
+@for (student of recentStudents; track student.id) {
+<ion-item>
+<ion-label>
+<h2>{{ student.prenom }} {{ student.nom }}</h2>
+<p>{{ student.classe }} — {{ student.matricule }}</p>
+</ion-label>
+<ion-badge slot="end" color="primary">{{ student.classe }}</ion-badge>
+</ion-item>
+}
+</ion-list>
+}
+</ion-card-content>
+</ion-card>
 </ion-content>

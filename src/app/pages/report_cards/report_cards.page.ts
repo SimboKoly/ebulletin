@@ -48,10 +48,15 @@ export class ReportCardsPage implements OnInit {
 
   ngOnInit() {
     this.reportCardForm = this.fb.group({
-      studentId: ['', Validators.required],
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      matricule: ['', Validators.required],
+      classe: ['', Validators.required],
+      periode: ['', Validators.required],
+      lines: ['', Validators.required],
       moyenne: ['', Validators.required],
+      mention: ['', Validators.required],
       rang: ['', Validators.required],
-      appreciation: ['', Validators.required]
     });
   }
 
@@ -61,10 +66,14 @@ export class ReportCardsPage implements OnInit {
 
       const reportCard: ReportCard = {
         id: Date.now(),
-        studentId: Number(this.reportCardForm.value.studentId),
+        student: this.reportCardForm.value.nom + ' ' + this.reportCardForm.value.prenom,
+        matricule: this.reportCardForm.value.matricule,
+        classe: this.reportCardForm.value.classe,
+        periode: this.reportCardForm.value.periode,
+        lines: this.reportCardForm.value.lines,
         moyenne: Number(this.reportCardForm.value.moyenne),
+        mention: this.reportCardForm.value.mention,
         rang: Number(this.reportCardForm.value.rang),
-        appreciation: this.reportCardForm.value.appreciation
       };
 
       console.log('Bulletin enregistré :', reportCard);
