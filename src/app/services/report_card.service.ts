@@ -42,6 +42,7 @@ export class ReportCardService {
   ? Math.round((totalPoints / totalCoeff) * 100) / 100
   : 0;
   return {
+  id: studentId,
   student: `${student.prenom} ${student.nom}`,
   matricule: student.matricule,
   classe: student.classe,

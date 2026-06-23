@@ -1,32 +1,96 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Gestion des notes</ion-title>
+  <ion-toolbar color="primary">
+  <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+  <ion-title>Notes ({{ grades.length }})</ion-title>
   </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  <ion-list>
+  @if (grades.length === 0) {
+  <ion-item>
+  <ion-label class="ion-text-center">Aucune note saisie.</ion-label>
+  </ion-item>
+  }
+  @for (grade of grades; track grade.id) {
+  <ion-item>
+  <ion-label>
+  <h2>{{ getStudentName(grade.studentId) }}</h2>
+  <p>{{ getSubjectName(grade.subjectId) }} — {{ grade.periode }}</p>
+  @if (grade.appreciation) {
+  <p><em>{{ grade.appreciation }}</em></p>
+  }
+  </ion-label>
+  <ion-badge slot="end" [color]="getNoteColor(grade.note)">
+  {{ grade.note }}/20
+  </ion-badge>
+  <ion-button fill="clear" slot="end" (click)="openEdit(grade)">
+  <ion-icon name="create-outline"></ion-icon>
+  </ion-button>
+  <ion-button fill="clear" color="danger" slot="end" (click)="confirmDelete(grade)">
+  <ion-icon name="trash-outline"></ion-icon>
+  </ion-button>
+  </ion-item>
+  }
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="openAdd()">
+  <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+  </ion-fab>
+  <ion-modal [isOpen]="showModal" (ionModalDidDismiss)="showModal = false">
+  <ng-template>
+  <ion-header>
+  <ion-toolbar>
+  <ion-title>{{ isEditing ? 'Modifier' : 'Saisir' }} une note</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="showModal = false">Fermer</ion-button>
+</ion-buttons>
+</ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
-
-  <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
-
-    <ion-item>
-      <ion-label position="stacked">ID Élève</ion-label>
-      <ion-input type="number" formControlName="studentId"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">ID Matière</ion-label>
-      <ion-input type="number" formControlName="subjectId"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Note</ion-label>
-      <ion-input type="number" formControlName="note"></ion-input>
-    </ion-item>
-
-    <ion-button expand="block" type="submit" [disabled]="gradeForm.invalid">
-      Enregistrer
-    </ion-button>
-
-  </form>
-
+<ion-item>
+<ion-select label="Élève *" labelPlacement="floating"
+[(ngModel)]="form.studentId">
+@for (s of students; track s.id) {
+<ion-select-option [value]="s.id">
+{{ s.prenom }} {{ s.nom }} ({{ s.classe }})
+</ion-select-option>
+}
+</ion-select>
+</ion-item>
+<ion-item>
+<ion-select label="Matière *" labelPlacement="floating"
+[(ngModel)]="form.subjectId">
+@for (sub of subjects; track sub.id) {
+<ion-select-option [value]="sub.id">
+{{ sub.libelle }} (Coef. {{ sub.coefficient }})
+</ion-select-option>
+}
+</ion-select>
+</ion-item>
+<ion-item>
+<ion-select label="Période *" labelPlacement="floating"
+[(ngModel)]="form.periode">
+@for (p of periodes; track p) {
+<ion-select-option [value]="p">{{ p }}</ion-select-option>
+}
+</ion-select>
+</ion-item>
+<ion-item>
+<ion-input label="Note /20 *" labelPlacement="floating"
+type="number" min="0" max="20" step="0.5"
+[(ngModel)]="form.note">
+</ion-input>
+</ion-item>
+<ion-item>
+<ion-textarea label="Appréciation" labelPlacement="floating"
+[(ngModel)]="form.appreciation" rows="3">
+</ion-textarea>
+</ion-item>
+<div class="ion-padding">
+<ion-button expand="block" (click)="save()">Enregistrer</ion-button>
+</div>
+</ion-content>
+</ng-template>
+</ion-modal>
 </ion-content>
